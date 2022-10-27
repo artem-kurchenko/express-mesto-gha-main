@@ -70,7 +70,7 @@ module.exports.updateUser = async (req, res, next) => {
     }).orFail(() => { throw new Error('test_error'); });
     res.send({ ...req.body });
   } catch (error) {
-    next(error);
+    next(new Error('error from catch'));
   }
 };
 
