@@ -16,11 +16,19 @@ router.get('/:id', celebrate({
 
 router.patch('/me', celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi.string().pattern(url),
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(8).pattern(password),
+    name: Joi.string().required().min(2).max(30)
+      .messages({
+        'string.min': 'Минимальная длина поля "name" - 2',
+        'string.max': 'Максимальная длина поля "name" - 30',
+        'string.empty': 'Поле "name" должно быть заполнено',
+      }),
+    about: Joi.string().required().min(2).max(30)
+      .messages({
+        'string.min': 'Минимальная длина поля "about" - 2',
+        'string.max': 'Максимальная длина поля "about" - 30',
+        'string.empty': 'Поле "about" должно быть заполнено',
+      }),
+
   }),
 }), updateUser);
 
