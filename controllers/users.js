@@ -67,7 +67,7 @@ module.exports.updateUser = async (req, res, next) => {
     await User.findByIdAndUpdate(req.user._id, req.body, {
       new: true,
       runValidators: true,
-    });
+    }).orFail(() => { throw new Error('test_error'); });
     res.send({ ...req.body });
   } catch (error) {
     next(error);

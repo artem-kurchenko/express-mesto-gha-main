@@ -15,7 +15,7 @@ router.get('/:id', celebrate({
 }), getUserById);
 
 router.patch('/me', celebrate({
-  body: Joi.object().keys({
+  body: {
     name: Joi.string().required().min(2).max(30)
       .messages({
         'string.min': 'Минимальная длина поля "name" - 2',
@@ -29,7 +29,7 @@ router.patch('/me', celebrate({
         'string.empty': 'Поле "about" должно быть заполнено',
       }),
 
-  }),
+  },
 }), updateUser);
 
 router.patch('/me/avatar', celebrate({
